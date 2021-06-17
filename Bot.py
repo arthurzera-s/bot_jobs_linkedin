@@ -5,7 +5,7 @@ from time import sleep
 from scraping import searchJob
 
 
-TOKEN_BOT = "1784193017:AAEy81S6CQWBtTghhxaU3i4rbrVVTUdQ0Zc"
+TOKEN_BOT = "AQUI O TOKEN DO BOT"
 URL_BASE = f'https://api.telegram.org/bot{TOKEN_BOT}'
 FILE_NAME = 'registered.txt'
 
@@ -30,12 +30,11 @@ def handlingUpdates(updates):
 				addID(_id, FILE_NAME)
 		
 		elif checkID(f'{_id}\n', FILE_NAME):
-			getJobs(text, _id)
 			print("Nova pesquisa de vagas.")
+			getJobs(text, _id)
 			
 		url = f'{URL_BASE}/getUpdates?offset={offset+1}'
-		r = requests.get(url)
-		
+		r = requests.get(url)	
 
 
 def getJobs(_key, _id):
@@ -69,12 +68,6 @@ def getUpdate():
 
 def sendWelcome(_id, name):
 	message = f"Olá, {name}! Sou um bot que busca vagas no LinkedIn!\nPor favor, digite qual a área de seu interesse:\n\n👨‍💻 Qualquer dúvida entre em contato com: @arthurzera"
-	url = f'{URL_BASE}/sendMessage?chat_id={_id}&text={message}'
-	requests.get(url)
-
-
-def sendInvalidCommand(_id):
-	message = f"Comando inválido. Para receber as vagas digite /start.\n\n👨‍💻 Qualquer dúvida entre em contato com: @arthurzera"
 	url = f'{URL_BASE}/sendMessage?chat_id={_id}&text={message}'
 	requests.get(url)
 
